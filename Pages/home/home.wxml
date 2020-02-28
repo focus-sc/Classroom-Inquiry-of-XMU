@@ -1,0 +1,87 @@
+<view class="page-begin"></view>
+<view class="container">
+<view class="page-body">
+  <!-- 头图 -->
+  <view class="section-swiper">
+    <swiper indicator-dots="{{indicatorDots}}" indicator-color="rgba(255,255,255,0.5)" indicator-active-color="rgba(255,255,255,0.8)"
+      autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}">
+      <block wx:for="{{background}}" wx:key="*this">
+        <swiper-item>
+          <view class="swiper-item">
+            <image src="{{item}}" mode="widthFix"></image>
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+
+  <!-- 教室选择 -->
+  <view class="section-class">
+    <view class="section-title">选择教学楼</view>
+    <picker mode="multiSelector" bindchange="pickClass" 
+      bindcolumnchange="pickClassColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+      <view class="picker-class">{{campus}} - {{build}}
+      </view>
+    </picker>
+    <view class="picker-icon"></view>
+  </view>
+
+  <!-- 时间选择 -->
+  <view class="section-day">
+    <view class="section-title">选择时间段</view>
+    <!-- 日期选择 -->
+    <view class="date-item">
+      <view class="day-item">
+        <text class="first {{selectToday ? 's-today' : 's-tomorrow'}}" bindtap="handleToday">今天</text>
+        <text class="{{selectToday ? 's-tomorrow' : 's-today'}}" bindtap="handleTomorrow">明天</text>
+      </view>
+      <view class="{{selectToday ? 'week-item-today' : 'week-item-tomorrow'}}">
+        <text class="first {{selectToday? 'w-today' : 'w-tomorrow'}}">{{weekToday}}</text>
+        <text class="{{selectToday? 'w-tomorrow' : 'w-today'}}">{{weekTomorrow}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 起始时间选择 -->
+  <view class="section-time">
+    <!--起始时间选择-->
+      <view class="section-title"> 起始:</view>
+      <view class="start-item">
+        <picker-view indicator-style="height: 40px;" style="width: 100px; height: 120px;" bindchange="changeTime" value="{{startTime}}">
+          <picker-view-column>
+            <view wx:for="{{startHourArray}}" style="line-height: 40px" wx:key="*this">{{item}}</view>
+          </picker-view-column>
+          <picker-view-column>
+            <view wx:for="{{minArray}}" style="line-height: 40px" wx:key="*this">{{item}}</view>
+          </picker-view-column>
+        </picker-view>
+      </view>
+    <!---终止时间选择-->
+      <view class="section-title"> 结束:</view>
+      <view class="end-item">
+        <picker-view indicator-style="height: 40px;" style="width: 100px; height:120px" bindchange="changeTimeEnd" value="{{endTime}}">
+          <picker-view-column>
+            <view wx:for="{{endHourArray}}" style="line-height: 40px" wx:key="*this">{{item}}</view>
+          </picker-view-column>
+          <picker-view-column>
+            <view wx:for="{{minArray}}" style="line-height: 40px" wx:key="*this">{{item}}</view>
+          </picker-view-column>
+        </picker-view>  
+      </view>
+  </view>
+
+  <!--查询按钮-->
+  <view class="section-inquire">
+    <button class="inquire-item" bindtap="handleToast">
+        <text class="inquire-text">查 询</text>
+    </button>
+    <!--
+        <button class="inquire-item" bindtap="handleInquire">
+          <text class="inquire-text">查 询</text>
+        </button>
+
+    -->
+  </view>
+
+</view>
+</view>
